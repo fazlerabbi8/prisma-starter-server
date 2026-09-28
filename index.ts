@@ -16,7 +16,10 @@ app.get("/", (req, res) => {
 app.get("/users", async(_, res) =>{
     // const users = await prisma.user.findFirst()
     // const users = await prisma.user.findFirstOrThrow()
-    const users = await prisma.user.findMany();
+    // const users = await prisma.user.findMany();
+    const users = await prisma.user.findUnique({
+        where: {email: "sara@example.com"}
+    });
     res.json(users);
 })
 
