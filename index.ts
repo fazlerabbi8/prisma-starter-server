@@ -14,7 +14,8 @@ app.get("/", (req, res) => {
 
 // getting user
 app.get("/users", async(_, res) =>{
-    const users = await prisma.user.findFirst()
+    // const users = await prisma.user.findFirst()
+    const users = await prisma.user.findFirstOrThrow()
     res.json(users);
 })
 
