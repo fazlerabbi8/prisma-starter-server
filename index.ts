@@ -17,9 +17,22 @@ app.get("/users", async(_, res) =>{
     // const users = await prisma.user.findFirst()
     // const users = await prisma.user.findFirstOrThrow()
     // const users = await prisma.user.findMany();
-    const users = await prisma.user.findUnique({
-        where: {email: "sara@example.com"}
-    });
+    // const users = await prisma.user.findUnique({
+    //     where: {email: "sara@example.com"}
+    // });
+    // const users = await prisma.user.findMany({
+    //     where: {isMarried : true, age: {gt: 30}},
+    // });
+    const users = await prisma.user.findMany({
+      where: {
+        OR: [
+          {nationality: "American"},
+          {
+            age: {gte: 30 }
+          }
+        ]
+      }
+    })
     res.json(users);
 })
 
