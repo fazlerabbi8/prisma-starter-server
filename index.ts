@@ -25,10 +25,10 @@ app.get("/users", async(_, res) =>{
     // });
     const users = await prisma.user.findMany({
       where: {
-        OR: [
+        AND: [
           {nationality: "American"},
           {
-            age: {gte: 30 }
+            age: {gt: 30 }
           }
         ]
       }
