@@ -48,6 +48,22 @@ app.get("/users", async (_, res) => {
   res.json(users);
 });
 
+
+app.put("/users", async(_, res) =>{
+  const updateUser = await prisma.user.update({
+    where: {email:"ayesha.khan@example.com"},
+    data: {
+      age: 20,
+      isMarried: false
+    }
+  });
+
+  res.status(200).json({
+    message: "User updated successfully.",
+    user: updateUser,
+  });
+})
+
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
