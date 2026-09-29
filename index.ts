@@ -64,6 +64,17 @@ app.put("/users", async(_, res) =>{
   });
 })
 
+app.delete("/users", async(_, res) =>{
+  const deleteUser = await prisma.user.delete({
+    where: {email: "sadia.rahman@example.com"}
+  })
+
+  res.status(200).json({
+    message: "user deleted successfully.",
+    user: deleteUser,
+  })
+})
+
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
