@@ -13,28 +13,33 @@ app.get("/", (req, res) => {
 });
 
 // getting user
-app.get("/users", async(_, res) =>{
-    // const users = await prisma.user.findFirst()
-    // const users = await prisma.user.findFirstOrThrow()
-    // const users = await prisma.user.findMany();
-    // const users = await prisma.user.findUnique({
-    //     where: {email: "sara@example.com"}
-    // });
-    // const users = await prisma.user.findMany({
-    //     where: {isMarried : true, age: {gt: 30}},
-    // });
-    const users = await prisma.user.findMany({
-      where: {
-        AND: [
-          {nationality: "American"},
-          {
-            age: {gt: 30 }
-          }
-        ]
-      }
-    })
-    res.json(users);
-})
+app.get("/users", async (_, res) => {
+  // const users = await prisma.user.findFirst()
+  // const users = await prisma.user.findFirstOrThrow()
+  // const users = await prisma.user.findMany();
+  // const users = await prisma.user.findUnique({
+  //     where: {email: "sara@example.com"}
+  // });
+  // const users = await prisma.user.findMany({
+  //     where: {isMarried : true, age: {gt: 30}},
+  // });
+  // const users = await prisma.user.findMany({
+  //   where: {
+  //     AND: [
+  //       {nationality: "American"},
+  //       {
+  //         age: {gt: 30 }
+  //       }
+  //     ]
+  //   }
+  // })
+  const users = await prisma.user.findMany({
+    where: {
+      nationality: { not: "American" },
+    },
+  });
+  res.json(users);
+});
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
