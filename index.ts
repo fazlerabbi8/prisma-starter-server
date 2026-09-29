@@ -33,9 +33,16 @@ app.get("/users", async (_, res) => {
   //     ]
   //   }
   // })
+  // const users = await prisma.user.findMany({
+  //   where: {
+  //     nationality: { not: "American" },
+  //   },
+  // });
   const users = await prisma.user.findMany({
     where: {
-      nationality: { not: "American" },
+      nationality: { 
+          in: ["British", "Japanese", "Pakistani"]
+       },
     },
   });
   res.json(users);
